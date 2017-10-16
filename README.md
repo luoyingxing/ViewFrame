@@ -25,7 +25,7 @@
     
 ## 权限 ##
 
-别忘了在AndroidManiFest.xml添加网络请求权限哦
+别忘了在AndroidManiFest.xml添加网络请求权限哦。
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -60,22 +60,22 @@ ps:说明一下，其中的一些配置参数可以通过xml配置，也可以�
 	 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
-	     super.onCreate(savedInstanceState);
-	     setContentView(R.layout.activity_main);
+	    super.onCreate(savedInstanceState);
+	    setContentView(R.layout.activity_main);
 	      
-		 mSlideView = findViewById(R.id.sv_main);
-		 mSlideView.init(getDefaultSlideList());	
-		 mSlideView.setOnItemClickListener(new SlideView.OnItemClickListener<SlideImage>() {
+	    mSlideView = findViewById(R.id.sv_main);
+	    mSlideView.init(getDefaultSlideList());	
+	    mSlideView.setOnItemClickListener(new SlideView.OnItemClickListener<SlideImage>() {
 
-         @Override
-         public void onItemClick(SlideImage result, int position) {
-               Toast.makeText(MainActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
-         }
-       });
+        @Override
+        public void onItemClick(SlideImage result, int position) {
+            Toast.makeText(MainActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
+        }
+        });
     }
 }
 
-ps:这其中传入的泛型类型是SlideImage.class，**切记：需要要在SlideImage.class中增加注解，用来标注图片地址的字段：**
+ps:这其中传入的泛型类型是SlideImage.class，**切记：需要在SlideImage.class中增加注解，用来标注图片地址的字段：**
 
     public class SlideImage {
 
@@ -86,12 +86,12 @@ ps:这其中传入的泛型类型是SlideImage.class，**切记：需要要在Sl
     }
 
 
-配置到此结束，是不是很简单呢，而通过泛型配置数据源，方面了很多。
+- 配置到此结束，是不是很简单呢，而通过泛型配置数据源，方面了很多。
 
 ## 联系 ##
 如果有紧急事件可联系作者或加QQ：
 - Q Q： 602390502
 - 邮箱： luoyingxing@126.com
 
-Wiki
+## Wiki ## 
 - [RefreshLayout 智能上拉加载和下拉刷新](https://github.com/luoyingxing/Refresh.git)
