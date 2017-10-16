@@ -87,3 +87,11 @@ public class SlideImage {
 
 
 配置到此结束，是不是很简单呢，而通过泛型配置数据源，方面了很多。
+
+## 联系 ##
+如果有紧急事件可联系作者或加QQ：
+Q Q： 602390502
+邮箱： luoyingxing@126.com
+
+Wiki
+- [RefreshLayout 智能上拉加载和下拉刷新](https://github.com/luoyingxing/Refresh.git)
