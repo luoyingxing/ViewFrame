@@ -16,74 +16,74 @@
     compile 'com.facebook.fresco:fresco:0.8.1'
 
 使用时需要在项目工程的Application中配置：
-```
-@Override
+
+    @Override
     public void onCreate() {
         super.onCreate();
         Fresco.initialize(this);
     }
-```
+    
+## 权限 ##
+
+别忘了在AndroidManiFest.xml添加网络请求权限哦
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 ## 使用 ##
 一、新建MainActivity
 在activity_main.xml 里面引入SlideView；
-```
-<com.lyx.frame.view.SlideView
-            android:id="@+id/sv_main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            slide:dotFocus="@drawable/icon_home_slide_focus"
-            slide:dotNormal="@drawable/icon_home_slide_normal"
-            slide:heightScale="1"
-            slide:intervalTime="3"
-            slide:placeHolderImage="@mipmap/image_empty_fresco"
-            slide:widthScale="2" />
-```
+
+    <com.lyx.frame.view.SlideView
+        android:id="@+id/sv_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        slide:dotFocus="@drawable/icon_home_slide_focus"
+        slide:dotNormal="@drawable/icon_home_slide_normal"
+        slide:heightScale="1"
+        slide:intervalTime="3"
+        slide:placeHolderImage="@mipmap/image_empty_fresco"
+        slide:widthScale="2" />
+            
 说明一下，其中的一些配置参数可以通过xml配置，也可以动态配置，都配有相应的方法。
 
-```
     slide:dotFocus="@drawable/icon_home_slide_focus"  //底部小圆圈（选中时）
     slide:dotNormal="@drawable/icon_home_slide_normal"  //底部小圆圈（未选中时）
     slide:widthScale="2"   //轮播图的相对宽度 
     slide:heightScale="1"   //轮播图的相对高度
     slide:intervalTime="3"   //轮播图的切换时间间隔
     slide:placeHolderImage="@mipmap/image_empty_fresco"   //轮播图的占位符
-```
 
 在MainActivity中设置数据源和监听事件：
 
-```
-public class MainActivity extends AppCompatActivity
-	 private SlideView mSlideView;
+    public class MainActivity extends AppCompatActivity
+	private SlideView mSlideView;
 	 
-	 @Override
-     protected void onCreate(Bundle savedInstanceState) {
-	      super.onCreate(savedInstanceState);
-	      setContentView(R.layout.activity_main);
+	@Override
+    protected void onCreate(Bundle savedInstanceState) {
+	     super.onCreate(savedInstanceState);
+	     setContentView(R.layout.activity_main);
 	      
-		  mSlideView = findViewById(R.id.sv_main);
-		  mSlideView.init(getDefaultSlideList());	
-		  mSlideView.setOnItemClickListener(new SlideView.OnItemClickListener<SlideImage>() {
+		 mSlideView = findViewById(R.id.sv_main);
+		 mSlideView.init(getDefaultSlideList());	
+		 mSlideView.setOnItemClickListener(new SlideView.OnItemClickListener<SlideImage>() {
 
-          @Override
-          public void onItemClick(SlideImage result, int position) {
+         @Override
+         public void onItemClick(SlideImage result, int position) {
                Toast.makeText(MainActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
-          }
-        });
+         }
+       });
     }
 }
-```
 
 这其中传入的泛型类型是SlideImage.class，**切记：需要要在SlideImage.class中增加注解，用来标注图片地址的字段：**
-```
-public class SlideImage {
 
-    @SlideView.ImageUrl
-    private String image;  //此处的@SlideView.ImageUrl注解是SlideView的一个内部类
+    public class SlideImage {
+
+        @SlideView.ImageUrl
+        private String image;  //此处的@SlideView.ImageUrl注解是SlideView的一个内部类
     
-    private String text;
-}
-```
+        private String text;
+    }
 
 
 配置到此结束，是不是很简单呢，而通过泛型配置数据源，方面了很多。
