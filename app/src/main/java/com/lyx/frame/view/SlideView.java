@@ -204,6 +204,7 @@ public class SlideView<T> extends FrameLayout {
      * 初始化视图中的各个组件
      */
     private void initUI() {
+        removeAllViews();
         RelativeLayout relativeLayout = new RelativeLayout(mContext);
         int width = ((WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getWidth();
         int height = (width / mSlideWidthScale) * mSlideHeightScale;
@@ -420,12 +421,10 @@ public class SlideView<T> extends FrameLayout {
     }
 
     @Override
-    public void onWindowFocusChanged(boolean hasWindowFocus) {
-        super.onWindowFocusChanged(hasWindowFocus);
-        if (!hasWindowFocus) {
-            stopPlay();
-            releaseResources();
-        }
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        stopPlay();
+        releaseResources();
     }
 
     private OnItemClickListener<T> mOnItemClickListener;
