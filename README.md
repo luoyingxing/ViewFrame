@@ -12,12 +12,12 @@
 
 ## 依赖 ##
 本文的图片加载依赖fresco框架，需要在build.grade文件配置以下依赖：
-```
+
     compile 'com.facebook.fresco:fresco:0.8.1'
-```
+
 使用时需要在项目工程的Application中配置：
 ```
-	@Override
+@Override
     public void onCreate() {
         super.onCreate();
         Fresco.initialize(this);
@@ -42,12 +42,12 @@
 说明一下，其中的一些配置参数可以通过xml配置，也可以动态配置，都配有相应的方法。
 
 ```
-slide:dotFocus="@drawable/icon_home_slide_focus"  //底部小圆圈（选中时）
-slide:dotNormal="@drawable/icon_home_slide_normal"  //底部小圆圈（未选中时）
-slide:widthScale="2"   //轮播图的相对宽度 
-slide:heightScale="1"   //轮播图的相对高度
-slide:intervalTime="3"   //轮播图的切换时间间隔
-slide:placeHolderImage="@mipmap/image_empty_fresco"   //轮播图的占位符
+    slide:dotFocus="@drawable/icon_home_slide_focus"  //底部小圆圈（选中时）
+    slide:dotNormal="@drawable/icon_home_slide_normal"  //底部小圆圈（未选中时）
+    slide:widthScale="2"   //轮播图的相对宽度 
+    slide:heightScale="1"   //轮播图的相对高度
+    slide:intervalTime="3"   //轮播图的切换时间间隔
+    slide:placeHolderImage="@mipmap/image_empty_fresco"   //轮播图的占位符
 ```
 
 在MainActivity中设置数据源和监听事件：
@@ -65,10 +65,10 @@ public class MainActivity extends AppCompatActivity
 		  mSlideView.init(getDefaultSlideList());	
 		  mSlideView.setOnItemClickListener(new SlideView.OnItemClickListener<SlideImage>() {
 
-            @Override
-            public void onItemClick(SlideImage result, int position) {
-                 Toast.makeText(MainActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
-            }
+          @Override
+          public void onItemClick(SlideImage result, int position) {
+               Toast.makeText(MainActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
+          }
         });
     }
 }
