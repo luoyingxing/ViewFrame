@@ -204,6 +204,7 @@ public class SlideView<T> extends FrameLayout {
      * 初始化视图中的各个组件
      */
     private void initUI() {
+        startPlay();
         removeAllViews();
         RelativeLayout relativeLayout = new RelativeLayout(mContext);
         int width = ((WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getWidth();
