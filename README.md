@@ -30,7 +30,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
 ## 使用 ##
-- 新建MainActivity
+一、新建MainActivity
 在activity_main.xml 里面引入SlideView；
 
     <com.lyx.frame.view.SlideView
@@ -44,7 +44,7 @@
         slide:placeHolderImage="@mipmap/image_empty_fresco"
         slide:widthScale="2" />
             
-- 说明一下，其中的一些配置参数可以通过xml配置，也可以动态配置，都配有相应的方法。
+ps:说明一下，其中的一些配置参数可以通过xml配置，也可以动态配置，都配有相应的方法。
 
     slide:dotFocus="@drawable/icon_home_slide_focus"  //底部小圆圈（选中时）
     slide:dotNormal="@drawable/icon_home_slide_normal"  //底部小圆圈（未选中时）
@@ -53,7 +53,7 @@
     slide:intervalTime="3"   //轮播图的切换时间间隔
     slide:placeHolderImage="@mipmap/image_empty_fresco"   //轮播图的占位符
 
-- 在MainActivity中设置数据源和监听事件：
+二、在MainActivity中设置数据源和监听事件：
 
     public class MainActivity extends AppCompatActivity
 	private SlideView mSlideView;
@@ -75,7 +75,7 @@
     }
 }
 
-- 这其中传入的泛型类型是SlideImage.class，**切记：需要要在SlideImage.class中增加注解，用来标注图片地址的字段：**
+ps:这其中传入的泛型类型是SlideImage.class，**切记：需要要在SlideImage.class中增加注解，用来标注图片地址的字段：**
 
     public class SlideImage {
 
@@ -86,7 +86,7 @@
     }
 
 
-- 配置到此结束，是不是很简单呢，而通过泛型配置数据源，方面了很多。
+配置到此结束，是不是很简单呢，而通过泛型配置数据源，方面了很多。
 
 ## 联系 ##
 如果有紧急事件可联系作者或加QQ：
