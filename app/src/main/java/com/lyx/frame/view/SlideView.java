@@ -204,7 +204,7 @@ public class SlideView<T> extends FrameLayout {
      * 初始化视图中的各个组件
      */
     private void initUI() {
-        startPlay();
+        stopPlay();
         removeAllViews();
         RelativeLayout relativeLayout = new RelativeLayout(mContext);
         int width = ((WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getWidth();
@@ -247,27 +247,22 @@ public class SlideView<T> extends FrameLayout {
             }
         }
 
-        //当图片数量为1时，将数量翻3倍，避免滑动出现白屏
-        if (1 == mImageCount) {
-            for (int i = 0; i < mImageCount * 2; i++) {
-                SimpleDraweeView view = new SimpleDraweeView(mContext);
-                view.setTag(getImageUrl(mSource.get(0)));
-                view.setOnClickListener(new OnItemListener(mSource.get(0), 0));
-                imageViewList.add(view);
-            }
-        }
-
-        mViewPager.setFocusable(true);
-        mViewPager.setPageTransformer(true, TransFormFactory.getTransFormer(5));
-        mViewPager.setAdapter(new SlideAdapter(imageViewList));
-        mViewPager.addOnPageChangeListener(new SlidePageChangeListener(dotViewList));
-        mViewPager.setCurrentItem(Integer.MAX_VALUE / 2);
-
         relativeLayout.addView(mViewPager);
         relativeLayout.addView(linearLayout);
         addView(relativeLayout);
 
-        startPlay();
+        mViewPager.setFocusable(true);
+        mViewPager.setPageTransformer(true, TransFormFactory.getTransFormer(5));
+        mViewPager.setAdapter(new SlideAdapter(imageViewList));
+
+        //当图为数量为1时，不滚动
+        if (1 == mImageCount) {
+            mViewPager.setCurrentItem(0);
+        } else {
+            mViewPager.addOnPageChangeListener(new SlidePageChangeListener(dotViewList));
+            mViewPager.setCurrentItem(Integer.MAX_VALUE / 2);
+            startPlay();
+        }
     }
 
     /**
@@ -305,7 +300,8 @@ public class SlideView<T> extends FrameLayout {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             if (mImageCount == 1) {
-                position %= mImageCount * 3;
+                //当图为数量为1时，不滚动
+                position = 0;
             } else if (mImageCount == 2) {
                 position %= mImageCount * 2;
             } else {
@@ -331,7 +327,12 @@ public class SlideView<T> extends FrameLayout {
 
         @Override
         public int getCount() {
-            return Integer.MAX_VALUE;
+            if (1 == mImageCount) {
+                //当图为数量为1时，不滚动
+                return 1;
+            } else {
+                return Integer.MAX_VALUE;
+            }
         }
 
         @Override
@@ -443,18 +444,18 @@ public class SlideView<T> extends FrameLayout {
         void onItemClick(T result, int position);
     }
 
-    private class OnItemListener implements OnClickListener{
+    private class OnItemListener implements OnClickListener {
         private T info;
         private int position;
 
-        public OnItemListener( T info,int position) {
+        public OnItemListener(T info, int position) {
             this.info = info;
             this.position = position;
         }
 
         @Override
         public void onClick(View v) {
-            if (null != mOnItemClickListener){
+            if (null != mOnItemClickListener) {
                 mOnItemClickListener.onItemClick(info, position);
             }
         }
